@@ -1,21 +1,22 @@
 <template>
   <div>
     <button @click.prevent="() => delBook(title, cat)">X</button>
-    <span :class="{ read: read }">{{ title }}</span>
-    <input type="checkbox" name="" id="" @click="readCheck" />
+    <span :class="readCheck">{{ title }}</span>
+    <input
+      type="checkbox"
+      @click="() => readToggle(title, cat)"
+      :checked="this.read"
+    />
   </div>
 </template>
 <script>
 export default {
-  props: ["title", "cat", "delBook"],
-  data() {
-    return {
-      read: false,
-    };
-  },
-  methods: {
+  props: ["title", "cat", "read", "delBook", "readToggle"],
+  computed: {
     readCheck() {
-      this.read = !this.read;
+      return {
+        readBook: this.read,
+      };
     },
   },
 };
@@ -23,9 +24,10 @@ export default {
 
 <style scoped>
 @import "./src/assets/main.css";
-.read {
+.readBook {
   text-decoration: line-through;
 }
+
 button {
   border: none;
   background-color: rgb(148, 148, 228);
