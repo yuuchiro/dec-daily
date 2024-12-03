@@ -30,26 +30,32 @@
   <div class="cat-container">
     <category
       :category-name="'Scifi'"
-      :books="books.scifi"
+      :books="showHide['scifi']"
       :del-book="(title, cat) => deleteBook(title, cat)"
       :read-toggle="(title, cat) => readToggle(title, cat)"
+      :select-all="(cat, op) => selectAll(cat, op)"
+      :check-count="(cat, txt, op) => checkCount(cat, txt, op)"
     ></category>
     <category
       :category-name="'Fantasy'"
-      :books="books.fantasy"
+      :books="showHide['fantasy']"
       :del-book="(title, cat) => deleteBook(title, cat)"
       :read-toggle="(title, cat) => readToggle(title, cat)"
+      :select-all="(cat, op) => selectAll(cat, op)"
+      :check-count="(cat, txt, op) => checkCount(cat, txt, op)"
     ></category>
     <category
       :category-name="'Historical'"
-      :books="books.historical"
+      :books="showHide['historical']"
       :del-book="(title, cat) => deleteBook(title, cat)"
       :read-toggle="(title, cat) => readToggle(title, cat)"
+      :select-all="(cat, op) => selectAll(cat, op)"
+      :check-count="(cat, txt, op) => checkCount(cat, txt, op)"
     ></category>
   </div>
 
   <button @click.prevent="clearRead">Clear read</button>
-  <button>{{ buttonText }}</button>
+  <button @click.prevent="buttonTextChange">{{ buttonText }}</button>
 </template>
 <script>
 import Category from "./components/Category.vue";
@@ -68,9 +74,15 @@ export default {
         ],
         historical: [{ title: "The Witches", read: false }],
       },
+      filtratedBooks: {
+        scifi: [],
+        fantasy: [],
+        historical: [],
+      },
       newBook: "",
       checkedCategory: "scifi",
       buttonText: "Hide read",
+      selectionFlag: true,
     };
   },
   methods: {
@@ -96,6 +108,52 @@ export default {
         this.books[cat] = this.books[cat].filter((book) => !book.read);
       }
     },
+    buttonTextChange() {
+      if (this.buttonText == "Hide read") this.buttonText = "Show all";
+      else this.buttonText = "Hide read";
+    },
+    selectAll(cat, op) {
+      switch (this.buttonText) {
+        case "Hide read":
+          this.books[cat].forEach((book) => (book.read = op));
+          break;
+        case "Show all":
+          this.filtratedBooks[cat].forEach((book) => (book.read = op));
+          break;
+      }
+    },
+    checkCount(cat, txt, op) {
+      console.log(cat + "\n" + txt + "\n" + op);
+      switch (txt) {
+        case "Select all":
+          this.books[cat].forEach((book) => {
+            if (!book.read) this.selectionFlag = false;
+            else this.selectionFlag = true;
+          });
+          if (!this.selectionFlag) return false;
+          return true;
+        case "Deselect all":
+          this.books[cat].forEach((book) => {
+            if (!book.read) this.selectionFlag = true;
+            else this.selectionFlag = false;
+          });
+          if (this.selectionFlag) return true;
+          return false;
+      }
+    },
+  },
+  computed: {
+    showHide() {
+      if (this.buttonText == "Hide read") return this.books;
+      else {
+        for (let cat in this.books) {
+          this.filtratedBooks[cat] = this.books[cat].filter(
+            (book) => !book.read
+          );
+        }
+        return this.filtratedBooks;
+      }
+    },
   },
 };
 </script>
@@ -104,7 +162,7 @@ export default {
 @import "./src/assets/main.css";
 
 button {
-  margin: 0 10px 0 0;
+  margin-right: 10px;
   border: 2px solid rgb(128, 192, 171);
   background-color: rgb(128, 192, 171);
   cursor: pointer;

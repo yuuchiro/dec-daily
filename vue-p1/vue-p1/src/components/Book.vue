@@ -1,22 +1,42 @@
 <template>
   <div>
-    <button @click.prevent="() => delBook(title, cat)">X</button>
+    <button @click.prevent="deleteBook">X</button>
     <span :class="readCheck">{{ title }}</span>
-    <input
-      type="checkbox"
-      @click="() => readToggle(title, cat)"
-      :checked="this.read"
-    />
+    <input type="checkbox" @click="cbxClick" :checked="this.read" />
   </div>
 </template>
 <script>
 export default {
-  props: ["title", "cat", "read", "delBook", "readToggle"],
+  props: [
+    "title",
+    "cat",
+    "read",
+    "delBook",
+    "readToggle",
+    "selectOp",
+    "checkCount",
+    "changeSelect",
+  ],
   computed: {
     readCheck() {
       return {
         readBook: this.read,
       };
+    },
+  },
+  methods: {
+    cbxClick() {
+      this.readToggle(this.title, this.cat);
+      this.checkCountF();
+    },
+    deleteBook() {
+      this.delBook(this.title, this.cat);
+      this.checkCountF();
+    },
+    checkCountF() {
+      if (this.checkCount(this.cat, this.selectOp.txt, this.selectOp.op)) {
+        this.changeSelect();
+      }
     },
   },
 };
