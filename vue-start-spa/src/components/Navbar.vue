@@ -37,10 +37,23 @@ export default {
       theme: "dark",
     };
   },
+  created() {
+    this.getThemeSetting();
+  },
   methods: {
     changeTheme() {
       if (this.theme == "light") this.theme = "dark";
       else this.theme = "light";
+      this.storeThemeSetting();
+    },
+    storeThemeSetting() {
+      localStorage.setItem("theme", this.theme);
+    },
+    getThemeSetting() {
+      const theme = localStorage.getItem("theme");
+      if (theme) {
+        this.theme = theme;
+      }
     },
   },
 };

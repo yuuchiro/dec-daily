@@ -6,6 +6,16 @@
 </template>
 <script>
 export default {
-  props: ["page"],
+  props: {
+    page: {
+      type: Object,
+      default() {
+        return {
+          pageTitle: "",
+          content: "",
+        };
+      },
+    },
+  },
 };
 </script>

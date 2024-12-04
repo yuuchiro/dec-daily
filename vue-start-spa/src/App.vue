@@ -4,7 +4,7 @@
     :active-page="activePage"
     :nav-link-click="(index) => (activePage = index)"
   ></navbar>
-  <page-view :page="pages[activePage]"></page-view>
+  <page-view v-if="pages.length > 0" :page="pages[activePage]"></page-view>
 </template>
 
 <script>
@@ -19,24 +19,19 @@ export default {
   data() {
     return {
       activePage: 0,
-      pages: [
-        {
-          link: { text: "Home", url: "index.html" },
-          pageTitle: "Home Page",
-          content: "This is the home content",
-        },
-        {
-          link: { text: "About", url: "index.html" },
-          pageTitle: "About Page",
-          content: "This is the about content",
-        },
-        {
-          link: { text: "Contact", url: "index.html" },
-          pageTitle: "Contact Page",
-          content: "This is the contact content",
-        },
-      ],
+      pages: [],
     };
+  },
+  created() {
+    this.getPages();
+  },
+  methods: {
+    async getPages() {
+      let res = await fetch("pages.json");
+      let data = await res.json();
+
+      this.pages = data;
+    },
   },
 };
 </script>
