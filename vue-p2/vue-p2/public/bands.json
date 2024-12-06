@@ -1,7 +1,32 @@
 [
   {
-    "name": "",
-    "genres": "",
+    "name": "Three Days Grace",
+    "genres": ["Rock"],
+    "titleImage": ""
+  },
+  {
+    "name": "The Score",
+    "genres": ["Alternative Pop", "Alternative Rock", "Electronic"],
+    "titleImage": ""
+  },
+  {
+    "name": "Skillet",
+    "genres": ["Christian Rock", "Christian Metal", "Hard Rock"],
+    "titleImage": ""
+  },
+  {
+    "name": "Fall Out Boy",
+    "genres": ["Rock", "Alternative Rock"],
+    "titleImage": ""
+  },
+  {
+    "name": "NEFFEX",
+    "genres": ["Electronic", "Rap"],
+    "titleImage": ""
+  },
+  {
+    "name": "Linkin Park",
+    "genres": ["Metal", "Rock"],
     "titleImage": ""
   }
 ]

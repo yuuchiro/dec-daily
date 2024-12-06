@@ -1,8 +1,127 @@
 [
   {
-    "title": "",
-    "author": "",
-    "genre": "",
+    "title": "Animal I Have Become",
+    "author": "Three Days Grace",
+    "album": "One-X"
+  },
+  {
+    "title": "Never Too Late",
+    "author": "Three Days Grace",
+    "album": "One-X"
+  },
+  {
+    "title": "Time of Dying",
+    "author": "Three Days Grace",
+    "album": "One-X"
+  },
+  {
+    "title": "Dreamin",
+    "author": "The Score",
+    "album": "Pressure"
+  },
+  {
+    "title": "Stronger",
+    "author": "The Score",
+    "album": "Pressure"
+  },
+  {
+    "title": "Born For This",
+    "author": "The Score",
+    "album": "Pressure"
+  },
+  {
+    "title": "The Fear",
+    "author": "The Score",
+    "album": "Pressure"
+  },
+  {
+    "title": "In My Blood",
+    "author": "The Score",
+    "album": "Metamorph"
+  },
+  {
+    "title": "Head Up",
+    "author": "The Score",
+    "album": "Metamorph"
+  },
+  {
+    "title": "Pull The Cord",
+    "author": "The Score",
+    "album": "Metamorph"
+  },
+  {
+    "title": "Skeletons",
+    "author": "The Score",
+    "album": "Metamorph"
+  },
+  {
+    "title": "Fighter",
+    "author": "The Score",
+    "album": "Metamorph"
+  },
+  {
+    "title": "Victorious",
+    "author": "The Score",
+    "album": "Metamorph"
+  },
+  {
+    "title": "Never Going Back",
+    "author": "Skillet",
+    "album": "Victorious"
+  },
+  {
+    "title": "Save Me",
+    "author": "Skillet",
+    "album": "Victorious"
+  },
+  {
+    "title": "Legendary",
+    "author": "Skillet",
+    "album": "Victorious"
+  },
+  {
+    "title": "Finish Line",
+    "author": "Skillet",
+    "album": "Victorious"
+  },
+  {
+    "title": "Alone Together",
+    "author": "Fall Out Boy",
+    "album": "Save Rock And Roll"
+  },
+  {
+    "title": "My Song Know What You Did In The Dark (Light Them Up)",
+    "author": "Fall Out Boy",
+    "album": "Save Rock And Roll"
+  },
+  {
+    "title": "The Phoenix",
+    "author": "Fall Out Boy",
+    "album": "Save Rock And Roll"
+  },
+  {
+    "title": "Careless",
+    "author": "NEFFEX",
+    "album": ""
+  },
+  {
+    "title": "Destiny",
+    "author": "NEFFEX",
+    "album": "Destiny: The Collection"
+  },
+  {
+    "title": "In The End",
+    "author": "Linkin Park",
+    "album": "Hybrid Theory"
+  },
+  {
+    "title": "Heavy Is The Crown",
+    "author": "Linkin Park",
+    "album": ""
+  },
+  {
+    "title": "The Emptiness Machine",
+    "author": "Linkin Park",
     "album": ""
   }
 ]
