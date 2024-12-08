@@ -6,7 +6,7 @@
         {{ option.label }}
       </option>
     </select>
-    <button @click="() => fetchData(category)">Search</button>
+    <button @click="() => fetchData(category, search)">Search</button>
   </div>
   <ul class="results-container" v-if="searchItems.length > 0">
     <li v-for="(item, i) in searchItems" :key="i">
@@ -15,16 +15,19 @@
         :title="item.title"
         :album-name="item.album"
         :band="item.author"
+        :render-link="(category, text) => renderLinks(category, text)"
       ></song>
       <band
         v-if="selectedComponent == 'bands'"
         :name="item.name"
         :genres="item.genres"
+        :render-link="(category, text) => renderLinks(category, text)"
       ></band>
       <album
         v-if="selectedComponent == 'albums'"
         :title="item.title"
         :author="item.author"
+        :render-link="(category, text) => renderLinks(category, text)"
       ></album>
     </li>
   </ul>
@@ -48,33 +51,58 @@ export default {
       ],
       searchItems: [],
       search: "",
-      category: "",
+      category: "songs",
       selectedComponent: "",
     };
   },
   methods: {
-    async fetchData(category) {
+    async fetchData(category, text) {
       const ref = await fetch(category + ".json");
       const data = await ref.json();
       switch (category) {
         case "bands":
           this.searchItems = data.filter(
-            (item) => item.name.toLowerCase() == this.search
+            (item) => item.name.toLowerCase() == text.toLowerCase()
           );
           break;
         default:
           this.searchItems = data.filter(
-            (item) => item.title.toLowerCase() == this.search
+            (item) => item.title.toLowerCase() == text.toLowerCase()
           );
           if (this.searchItems.length == 0) {
             this.searchItems = data.filter(
-              (item) => item.author.toLowerCase() == this.search
+              (item) => item.author.toLowerCase() == text.toLowerCase()
             );
           }
           break;
       }
-      this.search = "";
+      text = "";
       this.selectedComponent = this.category;
+    },
+    async renderLinks(cat, text) {
+      const res = await fetch(cat + ".json");
+      const data = await res.json();
+
+      switch (cat) {
+        case "bands":
+          this.searchItems = data.filter(
+            (item) => item.name.toLowerCase() == text.toLowerCase()
+          );
+          break;
+        default:
+          if (this.selectedComponent == "bands") {
+            this.searchItems = data.filter(
+              (item) => item.author.toLowerCase() == text.toLowerCase()
+            );
+            break;
+          }
+          this.searchItems = data.filter(
+            (item) => item.title.toLowerCase() == text.toLowerCase()
+          );
+          break;
+      }
+
+      this.selectedComponent = cat;
     },
   },
 };
