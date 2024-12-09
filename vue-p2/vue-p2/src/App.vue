@@ -56,23 +56,22 @@ export default {
     };
   },
   methods: {
+    filterSearch(arr, prop, text) {
+      this.searchItems = arr.filter(
+        (item) => item[prop].toLowerCase() == text.toLowerCase()
+      );
+    },
     async fetchData(category, text) {
       const ref = await fetch(category + ".json");
       const data = await ref.json();
       switch (category) {
         case "bands":
-          this.searchItems = data.filter(
-            (item) => item.name.toLowerCase() == text.toLowerCase()
-          );
+          this.filterSearch(data, "name", text);
           break;
         default:
-          this.searchItems = data.filter(
-            (item) => item.title.toLowerCase() == text.toLowerCase()
-          );
+          this.filterSearch(data, "title", text);
           if (this.searchItems.length == 0) {
-            this.searchItems = data.filter(
-              (item) => item.author.toLowerCase() == text.toLowerCase()
-            );
+            this.filterSearch(data, "author", text);
           }
           break;
       }
@@ -85,20 +84,15 @@ export default {
 
       switch (cat) {
         case "bands":
-          this.searchItems = data.filter(
-            (item) => item.name.toLowerCase() == text.toLowerCase()
-          );
+          this.filterSearch(data, "name", text);
           break;
         default:
           if (this.selectedComponent == "bands") {
-            this.searchItems = data.filter(
-              (item) => item.author.toLowerCase() == text.toLowerCase()
-            );
+            this.filterSearch(data, "author", text);
             break;
           }
-          this.searchItems = data.filter(
-            (item) => item.title.toLowerCase() == text.toLowerCase()
-          );
+
+          this.filterSearch(data, "title", text);
           break;
       }
 
