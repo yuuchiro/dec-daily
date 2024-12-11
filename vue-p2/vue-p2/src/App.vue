@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <input type="text" name="" id="" v-model="search" />
-    <select name="" id="" v-model="category">
-      <option v-for="option in options" :value="option.value">
-        {{ option.label }}
-      </option>
-    </select>
-    <button @click="() => fetchData(category, search)">Search</button>
+  <div class="input-container">
+    <div>
+      <input type="text" name="" id="" v-model="search" />
+      <select name="" id="" v-model="category">
+        <option v-for="option in options" :value="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <button @click="() => fetchData(category, search)">Search</button>
+    </div>
   </div>
   <ul class="results-container" v-if="searchItems.length > 0">
     <li v-for="(item, i) in searchItems" :key="i">
@@ -36,6 +38,8 @@
 import Song from "./components/Song.vue";
 import Band from "./components/Band.vue";
 import Album from "./components/Album.vue";
+
+import "./assets/main.css";
 export default {
   components: {
     Song,
@@ -101,3 +105,28 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.input-container {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0;
+}
+
+.results-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  color: whitesmoke;
+  list-style-type: none;
+}
+
+li {
+  min-width: 700px;
+  background: linear-gradient(140deg, var(--bg-dark) 0%, var(--bg-light) 100%);
+  margin: 20px 0;
+  padding: 20px;
+  border: 2px dashed rgb(89, 0, 255);
+  box-shadow: 0 0 5px rgba(89, 0, 255, 0.493);
+}
+</style>
