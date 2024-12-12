@@ -1,13 +1,20 @@
 <template>
   <div class="input-container">
     <div>
-      <input type="text" name="" id="" v-model="search" />
-      <select name="" id="" v-model="category">
+      <input
+        type="text"
+        class="sInput inp"
+        v-model="search"
+        placeholder="Type something..."
+      />
+      <select class="sInput sel" v-model="category">
         <option v-for="option in options" :value="option.value">
           {{ option.label }}
         </option>
       </select>
-      <button @click="() => fetchData(category, search)">Search</button>
+      <button class="sInput" @click="() => fetchData(category, search)">
+        Search
+      </button>
     </div>
   </div>
   <ul class="results-container" v-if="searchItems.length > 0">
@@ -80,6 +87,7 @@ export default {
           break;
       }
       text = "";
+      this.search = "";
       this.selectedComponent = this.category;
     },
     async renderLinks(cat, text) {
@@ -122,11 +130,56 @@ export default {
 }
 
 li {
-  min-width: 700px;
+  width: 700px;
   background: linear-gradient(140deg, var(--bg-dark) 0%, var(--bg-light) 100%);
   margin: 20px 0;
   padding: 20px;
   border: 2px dashed rgb(89, 0, 255);
   box-shadow: 0 0 5px rgba(89, 0, 255, 0.493);
+}
+
+.sInput {
+  background: linear-gradient(140deg, var(--bg-dark) 0%, var(--bg-light) 100%);
+  border: 2px solid rgb(37, 37, 37);
+  outline: none;
+  font-size: 20px;
+  padding: 7px 40px;
+  margin: 0 2px;
+  transition: 400ms;
+}
+
+.sInput:hover {
+  box-shadow: 0 0 10px rgba(73, 73, 73, 0.281);
+}
+
+.sel {
+  padding: 6px 20px;
+  color: rgba(246, 234, 255, 0.7);
+}
+
+option {
+  background-color: var(--bg-light);
+}
+
+.inp {
+  width: 500px;
+  border-radius: 50px 0 0 50px;
+  color: rgb(89, 0, 255);
+  font-weight: bold;
+}
+
+.inp::placeholder {
+  color: rgba(148, 90, 255, 0.6);
+  font-weight: bold;
+}
+
+button {
+  border-radius: 0 50px 50px 0;
+  cursor: pointer;
+  color: rgba(246, 234, 255, 0.7);
+  transition: 200ms;
+}
+button:hover {
+  color: rgba(246, 234, 255, 1);
 }
 </style>
