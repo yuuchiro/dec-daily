@@ -7,7 +7,11 @@
       <a class="navbar-brand" href="#">My Vue</a>
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li v-for="(page, index) in pages" :key="index" class="nav-item">
+        <li
+          v-for="(page, index) in publishedPages"
+          :key="index"
+          class="nav-item"
+        >
           <navbar-link
             :page="page"
             :is-active="activePage === index"
@@ -39,6 +43,11 @@ export default {
   },
   created() {
     this.getThemeSetting();
+  },
+  computed: {
+    publishedPages() {
+      return this.pages.filter((page) => page.published);
+    },
   },
   methods: {
     changeTheme() {

@@ -27,7 +27,11 @@
         </div>
         <div class="row mb-3">
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" />
+            <input
+              type="checkbox"
+              class="form-check-input"
+              v-model="published"
+            />
             <label for="" class="form-check-label">Published</label>
           </div>
         </div>
@@ -54,6 +58,7 @@ export default {
       content: "",
       linkText: "",
       linkUrl: "",
+      published: true,
     };
   },
   computed: {
@@ -77,7 +82,19 @@ export default {
           text: this.linkText,
           url: this.linkUrl,
         },
+        published: this.published,
       });
+
+      this.pageTitle = "";
+      this.content = "";
+      this.linkText = "";
+      this.linkUrl = "";
+      this.published = true;
+    },
+  },
+  watch: {
+    pageTitle(newTitle, oldTitle) {
+      if (this.linkText === oldTitle) this.linkText = newTitle;
     },
   },
 };
