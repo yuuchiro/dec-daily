@@ -5,7 +5,7 @@
     :nav-link-click="(index) => (activePage = index)"
   ></navbar>
   <!-- <page-view v-if="pages.length > 0" :page="pages[activePage]"></page-view> -->
-  <create-page :page-created="pageCreated"></create-page>
+  <create-page @page-created="pageCreated"></create-page>
 </template>
 
 <script>
