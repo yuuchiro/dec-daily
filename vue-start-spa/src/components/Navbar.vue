@@ -7,18 +7,15 @@
       <a class="navbar-brand" href="#">My Vue</a>
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li
+        <navbar-link
           v-for="(page, index) in publishedPages"
           :key="index"
           class="nav-item"
+          :page="page"
+          :is-active="activePage === index"
+          :index="index"
         >
-          <navbar-link
-            :page="page"
-            :is-active="activePage === index"
-            @click.prevent="navLinkClick(index)"
-          >
-          </navbar-link>
-        </li>
+        </navbar-link>
       </ul>
       <form class="d-flex">
         <button @click.prevent="changeTheme" class="btn btn-primary">
@@ -35,7 +32,7 @@ export default {
   components: {
     NavbarLink,
   },
-  props: ["pages", "activePage", "navLinkClick"],
+  props: ["pages", "activePage"],
   data() {
     return {
       theme: "dark",
