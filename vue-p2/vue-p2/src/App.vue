@@ -6,6 +6,7 @@
         class="sInput inp"
         v-model="search"
         placeholder="Type something..."
+        @keydown="(e) => e.key == 'Enter' && fetchData(category, search)"
       />
       <select class="sInput sel" v-model="category">
         <option v-for="option in options" :value="option.value">
@@ -17,6 +18,7 @@
       </button>
     </div>
   </div>
+
   <ul class="results-container" v-if="searchItems.length > 0">
     <li v-for="(item, i) in searchItems" :key="i">
       <song
@@ -24,19 +26,19 @@
         :title="item.title"
         :album-name="item.album"
         :band="item.author"
-        :render-link="(category, text) => renderLinks(category, text)"
+        :render-link="renderLinks"
       ></song>
       <band
         v-if="selectedComponent == 'bands'"
         :name="item.name"
         :genres="item.genres"
-        :render-link="(category, text) => renderLinks(category, text)"
+        :render-link="renderLinks"
       ></band>
       <album
         v-if="selectedComponent == 'albums'"
         :title="item.title"
         :author="item.author"
-        :render-link="(category, text) => renderLinks(category, text)"
+        :render-link="renderLinks"
       ></album>
     </li>
   </ul>
@@ -78,14 +80,26 @@ export default {
       switch (category) {
         case "bands":
           this.filterSearch(data, "name", text);
+          if (this.searchItems == 0) {
+            data.forEach((el) => {
+              el.genres.forEach((genre) => {
+                if (genre.toLowerCase() == this.search)
+                  this.searchItems.push(el);
+              });
+            });
+          }
           break;
         default:
           this.filterSearch(data, "title", text);
           if (this.searchItems.length == 0) {
             this.filterSearch(data, "author", text);
           }
+          if (this.searchItems.length == 0 && category == "songs") {
+            this.filterSearch(data, "album", text);
+          }
           break;
       }
+
       text = "";
       this.search = "";
       this.selectedComponent = this.category;
@@ -101,6 +115,11 @@ export default {
         default:
           if (this.selectedComponent == "bands") {
             this.filterSearch(data, "author", text);
+            break;
+          }
+
+          if (this.selectedComponent == "albums") {
+            this.filterSearch(data, "album", text);
             break;
           }
 

@@ -10,11 +10,11 @@
           :title="book.title"
           :cat="categoryName.toLowerCase()"
           :read="book.read"
-          :del-book="(title, cat) => delBook(title, cat)"
-          :read-toggle="(title, cat) => readToggle(title, cat)"
+          :del-book="delBook"
+          :read-toggle="readToggle"
           :select-op="{ txt: selectText, op: op }"
-          :check-count="(cat, txt, op) => checkCount(cat, txt, op)"
-          :change-select="() => changeSelect()"
+          :check-count="checkCount"
+          :change-select="changeSelect"
         ></book>
       </li>
     </ul>

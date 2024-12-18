@@ -31,26 +31,26 @@
     <category
       :category-name="'Scifi'"
       :books="showHide['scifi']"
-      :del-book="(title, cat) => deleteBook(title, cat)"
-      :read-toggle="(title, cat) => readToggle(title, cat)"
-      :select-all="(cat, op) => selectAll(cat, op)"
-      :check-count="(cat, txt, op) => checkCount(cat, txt, op)"
+      :del-book="deleteBook"
+      :read-toggle="readToggle"
+      :select-all="selectAll"
+      :check-count="checkCount"
     ></category>
     <category
       :category-name="'Fantasy'"
       :books="showHide['fantasy']"
-      :del-book="(title, cat) => deleteBook(title, cat)"
-      :read-toggle="(title, cat) => readToggle(title, cat)"
-      :select-all="(cat, op) => selectAll(cat, op)"
-      :check-count="(cat, txt, op) => checkCount(cat, txt, op)"
+      :del-book="deleteBook"
+      :read-toggle="readToggle"
+      :select-all="selectAll"
+      :check-count="checkCount"
     ></category>
     <category
       :category-name="'Historical'"
       :books="showHide['historical']"
-      :del-book="(title, cat) => deleteBook(title, cat)"
-      :read-toggle="(title, cat) => readToggle(title, cat)"
-      :select-all="(cat, op) => selectAll(cat, op)"
-      :check-count="(cat, txt, op) => checkCount(cat, txt, op)"
+      :del-book="deleteBook"
+      :read-toggle="readToggle"
+      :select-all="selectAll"
+      :check-count="checkCount"
     ></category>
   </div>
 
@@ -69,7 +69,7 @@ export default {
       books: {
         scifi: [{ title: "Star wars", read: false }],
         fantasy: [
-          { title: "Hobbit", read: true },
+          { title: "Hobbit", read: false },
           { title: "The Witcher", read: false },
         ],
         historical: [{ title: "The Witches", read: false }],
