@@ -1,5 +1,5 @@
 <template>
-  <form action="">
+  <form action="" v-if="!showUsers">
     <div class="formDiv">
       <label for="userName">Username</label>
       <input type="text" name="userName" id="userName" v-model="name" />
@@ -37,20 +37,58 @@
     </div>
   </form>
 
-  <button class="showUsers">Show users</button>
+  <button class="showUsers" @click="showHideUsers">{{ showButtonText }}</button>
+
+  <table v-if="showUsers">
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Bio</th>
+      <th>Editing</th>
+    </tr>
+    <user
+      v-for="user in users"
+      :username="user.name"
+      :email="user.email"
+      :bio="user.bio"
+    ></user>
+  </table>
 </template>
 <script>
+import User from "./components/User.vue";
 export default {
+  components: { User },
   data() {
     return {
-      users: [],
+      users: [
+        {
+          name: "maciekPl12",
+          email: "maciekpl@gmail.com",
+          password: "lubiefortnite",
+          bio: "12321",
+        },
+        {
+          name: "MaxPl247",
+          email: "maxpl247@onet.pl",
+          password: this.password,
+          bio: "lorem ipsum dolor amet bla bla bla bla",
+        },
+        {
+          name: "maciekPl12",
+          email: "maciekpl@gmail.com",
+          password: "lubiefortnite",
+          bio: "12321",
+        },
+      ],
 
       name: "",
       email: "",
       password: "",
       repeatedPassword: "",
-
       samePassword: true,
+
+      showUsers: false,
+      showButtonText: "Show users",
     };
   },
   computed: {
@@ -70,6 +108,7 @@ export default {
         name: this.name,
         email: this.email,
         password: this.password,
+        bio: "",
       });
 
       this.name = "";
@@ -78,6 +117,15 @@ export default {
       this.repeatedPassword = "";
 
       console.log(this.users);
+    },
+    showHideUsers() {
+      if (!this.showUsers) {
+        this.showUsers = true;
+        this.showButtonText = "Add users";
+      } else {
+        this.showUsers = false;
+        this.showButtonText = "Show users";
+      }
     },
   },
   watch: {
@@ -129,11 +177,10 @@ input {
 }
 
 .showUsers {
-  width: 300px;
+  width: 100px;
   position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 10px;
+  right: 10px;
 
   border: none;
   background-color: purple;
@@ -143,5 +190,9 @@ input {
   font-weight: bolder;
   color: plum;
   cursor: pointer;
+}
+
+th {
+  background-color: rgb(202, 207, 255);
 }
 </style>

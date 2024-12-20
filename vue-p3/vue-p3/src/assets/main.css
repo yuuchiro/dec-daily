@@ -4,3 +4,19 @@
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+th,
+td {
+  border: 1px solid white;
+  padding: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 30px auto;
+  min-width: 700px;
+}
+
+tr:nth-of-type(odd) {
+  background-color: rgb(245, 245, 245);
+}
