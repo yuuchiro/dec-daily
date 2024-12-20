@@ -2,32 +2,92 @@
   <form action="">
     <div class="formDiv">
       <label for="userName">Username</label>
-      <input type="text" name="userName" id="userName" />
+      <input type="text" name="userName" id="userName" v-model="name" />
     </div>
 
     <div class="formDiv">
       <label for="userEmail">Email</label>
-      <input type="email" name="userEmail" id="userEmail" />
+      <input type="email" name="userEmail" id="userEmail" v-model="email" />
     </div>
 
     <div class="formDiv">
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" />
+      <input type="password" name="password" id="password" v-model="password" />
     </div>
 
     <div class="formDiv">
       <label for="repeatPass">Repeat password</label>
-      <input type="password" name="repeatPass" id="repeatPass" />
+      <input
+        type="password"
+        name="repeatPass"
+        id="repeatPass"
+        v-model="repeatedPassword"
+      />
+      <p class="err" v-if="!samePassword">Password should be the same!</p>
     </div>
 
     <div class="formDiv">
-      <button class="registerButton">Add user</button>
+      <button
+        class="registerButton"
+        @click.prevent="addUser"
+        :disabled="filledForm"
+      >
+        Add user
+      </button>
     </div>
   </form>
 
   <button class="showUsers">Show users</button>
 </template>
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      users: [],
+
+      name: "",
+      email: "",
+      password: "",
+      repeatedPassword: "",
+
+      samePassword: true,
+    };
+  },
+  computed: {
+    filledForm() {
+      return (
+        !this.name ||
+        !this.email ||
+        !this.password ||
+        !this.repeatedPassword ||
+        !this.samePassword
+      );
+    },
+  },
+  methods: {
+    addUser() {
+      this.users.push({
+        name: this.name,
+        email: this.email,
+        password: this.password,
+      });
+
+      this.name = "";
+      this.email = "";
+      this.password = "";
+      this.repeatedPassword = "";
+
+      console.log(this.users);
+    },
+  },
+  watch: {
+    repeatedPassword(pass) {
+      if (pass !== this.password) this.samePassword = false;
+      else this.samePassword = true;
+    },
+  },
+};
+</script>
 <style scoped>
 form {
   width: 600px;
@@ -50,6 +110,11 @@ input {
 
 .formDiv {
   margin: 20px 0;
+}
+
+.err {
+  padding: 10px;
+  color: red;
 }
 
 .registerButton {
