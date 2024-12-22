@@ -51,13 +51,17 @@
       :username="user.name"
       :email="user.email"
       :bio="user.bio"
+      @edit-user="editUser"
     ></user>
   </table>
+
+  <!-- <edit></edit> -->
 </template>
 <script>
 import User from "./components/User.vue";
+import Edit from "./components/Edit.vue";
 export default {
-  components: { User },
+  components: { User, Edit },
   data() {
     return {
       users: [
@@ -70,7 +74,7 @@ export default {
         {
           name: "MaxPl247",
           email: "maxpl247@onet.pl",
-          password: this.password,
+          password: "roblox123",
           bio: "lorem ipsum dolor amet bla bla bla bla",
         },
         {
@@ -115,8 +119,6 @@ export default {
       this.email = "";
       this.password = "";
       this.repeatedPassword = "";
-
-      console.log(this.users);
     },
     showHideUsers() {
       if (!this.showUsers) {
@@ -126,6 +128,9 @@ export default {
         this.showUsers = false;
         this.showButtonText = "Show users";
       }
+    },
+    editUser(userObj) {
+      console.log(userObj);
     },
   },
   watch: {

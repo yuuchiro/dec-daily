@@ -3,11 +3,25 @@
     <td>{{ username }}</td>
     <td>{{ email }}</td>
     <td>{{ bio }}</td>
-    <td>Edit</td>
+    <td @click="$emit('editUser', userData)">Edit</td>
   </tr>
 </template>
 <script>
 export default {
   props: ["username", "email", "bio"],
+  data() {
+    return {
+      userData: {
+        username: this.username,
+        email: this.email,
+        bio: this.bio,
+      },
+    };
+  },
 };
 </script>
+<style scoped>
+td:last-of-type {
+  cursor: pointer;
+}
+</style>
