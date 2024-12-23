@@ -8,13 +8,15 @@
 </template>
 <script>
 export default {
-  props: ["username", "email", "bio"],
+  props: ["username", "email", "password", "bio"],
+  emits: ["editUser"],
   data() {
     return {
       userData: {
         username: this.username,
         email: this.email,
         bio: this.bio,
+        password: this.password,
       },
     };
   },

@@ -1,23 +1,23 @@
 <template>
-  <div class="bg"></div>
+  <div class="bg" @click="$emit('closeEdition', {})"></div>
   <div class="edit" v-if="edit">
     <div class="container">
       <label for="">Username</label>
-      <input type="text" name="" id="" />
+      <input type="text" name="" id="editName" v-model="uName" />
     </div>
     <div class="container">
       <label for="">Email</label>
-      <input type="email" name="" id="" />
+      <input type="email" name="" id="editEmail" v-model="uEmail" />
     </div>
     <div class="container">
       <label for="">Bio</label>
-      <textarea name="" id=""></textarea>
+      <textarea name="" id="editBio" v-model="uBio"></textarea>
     </div>
     <div class="container">
       <label for="">Password</label>
-      <input type="password" name="" id="" />
+      <input type="password" name="" id="editPassword" v-model="uPassword" />
     </div>
-    <button>Save</button>
+    <button @click="saveChanges">Save</button>
   </div>
   <div class="confirm" v-if="!edit">
     <div class="container">
@@ -30,10 +30,29 @@
 </template>
 <script>
 export default {
+  props: ["username", "email", "bio", "password"],
+  emits: ["closeEdition"],
   data() {
     return {
       edit: true,
+
+      uName: this.username,
+      uEmail: this.email,
+      uBio: this.bio,
+      uPassword: this.password,
     };
+  },
+  methods: {
+    saveChanges() {
+      if (
+        this.uName !== this.username ||
+        this.uEmail !== this.email ||
+        this.uBio !== this.bio ||
+        this.uPassword !== this.password
+      )
+        this.edit = false;
+      else this.$emit("closeEdition", {});
+    },
   },
 };
 </script>

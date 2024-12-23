@@ -51,11 +51,19 @@
       :username="user.name"
       :email="user.email"
       :bio="user.bio"
-      @edit-user="editUser"
+      :password="user.password"
+      @edit-user="edit"
     ></user>
   </table>
 
-  <!-- <edit></edit> -->
+  <edit
+    v-if="edition"
+    @close-edition="closeEdition"
+    :username="editUser.username"
+    :email="editUser.email"
+    :bio="editUser.bio"
+    :password="editUser.password"
+  ></edit>
 </template>
 <script>
 import User from "./components/User.vue";
@@ -93,6 +101,9 @@ export default {
 
       showUsers: false,
       showButtonText: "Show users",
+
+      edition: false,
+      editUser: {},
     };
   },
   computed: {
@@ -129,8 +140,14 @@ export default {
         this.showButtonText = "Show users";
       }
     },
-    editUser(userObj) {
-      console.log(userObj);
+    edit(userObj) {
+      this.editUser = userObj;
+
+      this.edition = true;
+    },
+    closeEdition() {
+      this.edition = false;
+      this.editUser = {};
     },
   },
   watch: {
