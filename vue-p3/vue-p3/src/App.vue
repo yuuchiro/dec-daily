@@ -3,6 +3,7 @@
     <div class="formDiv">
       <label for="userName">Username</label>
       <input type="text" name="userName" id="userName" v-model="name" />
+      <p class="err" v-if="!availableUsername">Username is already used!</p>
     </div>
 
     <div class="formDiv">
@@ -59,6 +60,7 @@
   <edit
     v-if="edition"
     @close-edition="closeEdition"
+    @change-data="changeUserData"
     :username="editUser.username"
     :email="editUser.email"
     :bio="editUser.bio"
@@ -86,9 +88,9 @@ export default {
           bio: "lorem ipsum dolor amet bla bla bla bla",
         },
         {
-          name: "maciekPl12",
+          name: "maciekPl123",
           email: "maciekpl@gmail.com",
-          password: "lubiefortnite",
+          password: "12321",
           bio: "12321",
         },
       ],
@@ -98,6 +100,7 @@ export default {
       password: "",
       repeatedPassword: "",
       samePassword: true,
+      availableUsername: true,
 
       showUsers: false,
       showButtonText: "Show users",
@@ -113,7 +116,8 @@ export default {
         !this.email ||
         !this.password ||
         !this.repeatedPassword ||
-        !this.samePassword
+        !this.samePassword ||
+        !this.availableUsername
       );
     },
   },
@@ -149,11 +153,30 @@ export default {
       this.edition = false;
       this.editUser = {};
     },
+    changeUserData(newData) {
+      this.users.forEach((user, i) => {
+        if (user.name == newData.oldname)
+          this.users[i] = {
+            name: newData.name,
+            email: newData.email,
+            password: newData.password,
+            bio: newData.bio,
+          };
+      });
+    },
   },
   watch: {
     repeatedPassword(pass) {
       if (pass !== this.password) this.samePassword = false;
       else this.samePassword = true;
+    },
+    name(n) {
+      this.availableUsername = true;
+      this.users.forEach((user) => {
+        if (user.name === n) {
+          this.availableUsername = false;
+        }
+      });
     },
   },
 };
@@ -196,6 +219,10 @@ input {
   font-weight: bold;
   color: white;
   cursor: pointer;
+}
+.registerButton:disabled {
+  background-color: rgba(0, 128, 0, 0.548);
+  cursor: auto;
 }
 
 .showUsers {

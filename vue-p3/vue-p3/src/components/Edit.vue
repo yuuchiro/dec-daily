@@ -22,16 +22,17 @@
   <div class="confirm" v-if="!edit">
     <div class="container">
       <label>Type your password:</label>
-      <input type="password" name="" id="" />
+      <input type="password" name="" id="" v-model="confirmPassword" />
+      <p class="err" v-if="!correctPassword">Password should be the same!</p>
     </div>
 
-    <button>Save</button>
+    <button @click="confirmChanges">Save</button>
   </div>
 </template>
 <script>
 export default {
   props: ["username", "email", "bio", "password"],
-  emits: ["closeEdition"],
+  emits: ["closeEdition", "changeData"],
   data() {
     return {
       edit: true,
@@ -40,6 +41,9 @@ export default {
       uEmail: this.email,
       uBio: this.bio,
       uPassword: this.password,
+
+      confirmPassword: "",
+      correctPassword: true,
     };
   },
   methods: {
@@ -52,6 +56,21 @@ export default {
       )
         this.edit = false;
       else this.$emit("closeEdition", {});
+    },
+    confirmChanges() {
+      this.correctPassword = true;
+      if (this.confirmPassword !== this.password) {
+        this.correctPassword = false;
+        return;
+      }
+      this.$emit("changeData", {
+        oldname: this.username,
+        name: this.uName,
+        email: this.uEmail,
+        password: this.uPassword,
+        bio: this.uBio,
+      });
+      this.$emit("closeEdition", {});
     },
   },
 };
@@ -76,6 +95,11 @@ export default {
   color: white;
   padding: 50px;
   border-radius: 10px;
+}
+
+.err {
+  padding: 10px;
+  color: red;
 }
 
 label {

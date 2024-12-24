@@ -20,10 +20,22 @@ export default {
       },
     };
   },
+  updated() {
+    this.userData = {
+      username: this.username,
+      email: this.email,
+      bio: this.bio,
+      password: this.password,
+    };
+  },
 };
 </script>
 <style scoped>
 td:last-of-type {
   cursor: pointer;
+  transition: background-color 200ms;
+}
+td:last-of-type:hover {
+  background-color: rgb(190, 141, 255);
 }
 </style>
