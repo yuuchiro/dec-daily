@@ -16,6 +16,12 @@
           :index="index"
         >
         </navbar-link>
+
+        <li>
+          <router-link to="/create" class="nav-link" aria-current="page"
+            >Create Page
+          </router-link>
+        </li>
       </ul>
       <form class="d-flex">
         <button @click.prevent="changeTheme" class="btn btn-primary">

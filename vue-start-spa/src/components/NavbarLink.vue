@@ -1,14 +1,13 @@
 <template>
   <li>
-    <a
+    <router-link
+      :to="`/${index}`"
       class="nav-link"
       :class="activeClasses"
       aria-current="page"
-      :href="page.link.url"
       :title="`This link goes to the ${page.link.text.toLowerCase()} page`"
-      @click.prevent="$bus.$emit('navbarLinkActivated', index)"
       >{{ page.link.text }}
-    </a>
+    </router-link>
   </li>
 </template>
 
