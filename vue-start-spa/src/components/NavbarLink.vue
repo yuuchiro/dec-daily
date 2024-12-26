@@ -3,7 +3,7 @@
     <router-link
       :to="`/${index}`"
       class="nav-link"
-      :class="activeClasses"
+      active-class="active"
       aria-current="page"
       :title="`This link goes to the ${page.link.text.toLowerCase()} page`"
       >{{ page.link.text }}
@@ -13,20 +13,6 @@
 
 <script>
 export default {
-  props: ["page", "index", "isActive"],
-  computed: {
-    activeClasses() {
-      return {
-        active: this.isActive,
-        emphasize: this.isActive,
-      };
-    },
-  },
+  props: ["page", "index"],
 };
 </script>
-
-<style scoped>
-.emphasize {
-  text-decoration: underline;
-}
-</style>

@@ -9,16 +9,17 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <navbar-link
           v-for="(page, index) in publishedPages"
-          :key="index"
-          class="nav-item"
           :page="page"
-          :is-active="activePage === index"
           :index="index"
         >
         </navbar-link>
 
         <li>
-          <router-link to="/create" class="nav-link" aria-current="page"
+          <router-link
+            to="/pages/create"
+            class="nav-link"
+            aria-current="page"
+            active-class="active"
             >Create Page
           </router-link>
         </li>
@@ -38,14 +39,16 @@ export default {
   components: {
     NavbarLink,
   },
-  props: ["pages", "activePage"],
   data() {
     return {
       theme: "dark",
+      pages: "",
     };
   },
   created() {
     this.getThemeSetting();
+
+    this.pages = this.$pages.getAllPages();
   },
   computed: {
     publishedPages() {
