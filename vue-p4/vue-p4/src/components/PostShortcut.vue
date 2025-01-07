@@ -1,13 +1,18 @@
 <template>
-  <div class="container">
-    <span>author_name</span>
-    <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+  <RouterLink class="container" :to="'/see-all/' + postInfo.id">
+    <span>{{ postInfo.author }}</span>
+    <h1>{{ postInfo.title }}</h1>
     <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-      doloribus culpa rem inventore quae sit tenetur quia odio saepe ex...
+      {{ postInfo.content.substring(0, 160) + "..." }}
     </p>
-  </div>
+  </RouterLink>
 </template>
+<script>
+import { RouterLink } from "vue-router";
+export default {
+  props: ["postInfo"],
+};
+</script>
 <style scoped>
 .container {
   padding: 30px;
@@ -16,6 +21,8 @@
   max-width: 800px;
   cursor: pointer;
   transition: scale 300ms;
+  text-decoration: none;
+  margin: 30px 0;
 }
 .container:hover {
   scale: 1.05;

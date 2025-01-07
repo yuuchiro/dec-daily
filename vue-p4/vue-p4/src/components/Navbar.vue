@@ -1,13 +1,19 @@
 <template>
   <nav>
-    <a href="" class="selected"
-      ><ion-icon :name="names.home.selected"></ion-icon>Home page</a
+    <RouterLink to="/" active-class="selected"
+      ><ion-icon :name="names.home.selected"></ion-icon>Home page</RouterLink
     >
-    <a href=""><ion-icon :name="names.plus.normal"></ion-icon>Add new post</a>
-    <a href=""><ion-icon :name="names.eye.normal"></ion-icon>See all posts</a>
+    <RouterLink to="/add-post" active-class="selected"
+      ><ion-icon :name="names.plus.normal"></ion-icon>Add new post</RouterLink
+    >
+    <RouterLink to="/see-all" active-class="selected"
+      ><ion-icon :name="names.eye.normal"></ion-icon>See all posts</RouterLink
+    >
   </nav>
 </template>
 <script>
+import { RouterLink } from "vue-router";
+
 export default {
   data() {
     return {

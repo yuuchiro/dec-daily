@@ -1,14 +1,13 @@
 <template>
   <navbar></navbar>
-  <div class="post-container">
-    <post-shortcut></post-shortcut>
-  </div>
+  <RouterView></RouterView>
 </template>
 <script>
+import { RouterView } from "vue-router";
 import Navbar from "./components/Navbar.vue";
-import PostShortcut from "./components/PostShortcut.vue";
+
 export default {
-  components: { Navbar, PostShortcut },
+  components: { Navbar },
 };
 </script>
 <style scoped>
