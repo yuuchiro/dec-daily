@@ -18,7 +18,7 @@ const router = createRouter({
     {
       path: "/see-all",
       component: SeeAll,
-      children: [{ path: ":postId", component: Post }],
+      children: [{ path: ":postId", component: Post, props: true }],
     },
   ],
 });

@@ -8,19 +8,12 @@ import PostShortcut from "@/components/PostShortcut.vue";
 export default {
   components: { PostShortcut },
   created() {
-    this.fetchData();
+    this.postList = this.$posts.getNewPosts();
   },
   data() {
     return {
-      postList: [],
+      postList: null,
     };
-  },
-  methods: {
-    async fetchData() {
-      const data = await fetch("./posts.json");
-      const posts = await data.json();
-      this.postList = posts;
-    },
   },
 };
 </script>

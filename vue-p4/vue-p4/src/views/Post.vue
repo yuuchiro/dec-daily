@@ -3,20 +3,24 @@
 </template>
 <script>
 export default {
+  props: ["postId"],
   created() {
-    this.fetchData();
+    this.postList = this.$posts.getAllPosts();
+
+    this.postList.forEach((post) => {
+      if (post.id == this.postId) this.post = post;
+    });
   },
   data() {
     return {
-      post: {},
+      post: null,
+      postList: null,
     };
   },
-  methods: {
-    async fetchData() {
-      const data = await fetch("./posts.json");
-      const posts = await data.json();
-      posts.forEach((post) => {
-        if (post.id == this.$route.params.postId) this.post = post;
+  watch: {
+    postId(newId) {
+      this.postList.forEach((post) => {
+        if (post.id == newId) this.post = post;
       });
     },
   },
