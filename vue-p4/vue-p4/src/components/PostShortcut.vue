@@ -1,5 +1,5 @@
 <template>
-  <RouterLink class="container" :to="'/see-all/' + postInfo.id">
+  <RouterLink class="container" :to="'/post/' + postInfo.id">
     <span>{{ postInfo.author }}</span>
     <h1>{{ postInfo.title }}</h1>
     <p>
@@ -8,7 +8,6 @@
   </RouterLink>
 </template>
 <script>
-import { RouterLink } from "vue-router";
 export default {
   props: ["postInfo"],
 };

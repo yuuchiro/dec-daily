@@ -16,6 +16,7 @@ export default {
   },
 
   getNewPosts() {
-    return postList.reverse().slice(0, 4);
+    const reversedList = postList.reverse();
+    return reversedList.slice(0, 3);
   },
 };
