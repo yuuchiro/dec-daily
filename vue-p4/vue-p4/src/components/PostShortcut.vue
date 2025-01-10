@@ -1,11 +1,13 @@
 <template>
-  <RouterLink class="container" :to="'/post/' + postInfo.id">
-    <span>{{ postInfo.author }}</span>
-    <h1>{{ postInfo.title }}</h1>
-    <p>
-      {{ postInfo.content.substring(0, 160) + "..." }}
-    </p>
-  </RouterLink>
+  <router-link :to="'/post/' + postInfo.id" class="link">
+    <div class="container">
+      <span>{{ postInfo.author }}</span>
+      <h1>{{ postInfo.title }}</h1>
+      <p>
+        {{ postInfo.content.substring(0, 160) + "..." }}
+      </p>
+    </div>
+  </router-link>
 </template>
 <script>
 export default {
@@ -20,7 +22,6 @@ export default {
   max-width: 800px;
   cursor: pointer;
   transition: scale 300ms;
-  text-decoration: none;
   margin: 30px 0;
 }
 .container:hover {
@@ -42,5 +43,9 @@ export default {
   color: rgb(225, 224, 255);
   padding-left: 20px;
   border-left: 5px solid rgb(143, 141, 255);
+}
+
+.link {
+  text-decoration: none;
 }
 </style>

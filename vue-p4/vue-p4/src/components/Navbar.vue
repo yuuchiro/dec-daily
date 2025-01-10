@@ -1,7 +1,7 @@
 <template>
   <nav>
     <RouterLink to="/" active-class="selected"
-      ><ion-icon :name="names.home.selected"></ion-icon>Home page</RouterLink
+      ><ion-icon :name="names.home.normal"></ion-icon>Home page</RouterLink
     >
     <RouterLink to="/add-post" active-class="selected"
       ><ion-icon :name="names.plus.normal"></ion-icon>Add new post</RouterLink
@@ -12,8 +12,6 @@
   </nav>
 </template>
 <script>
-import { RouterLink } from "vue-router";
-
 export default {
   data() {
     return {

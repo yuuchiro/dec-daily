@@ -1,5 +1,6 @@
 <template>
   <div class="post-container">
+    <input type="text" name="" id="" />
     <post-shortcut v-for="post in postList" :post-info="post"></post-shortcut>
   </div>
 </template>
@@ -18,3 +19,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.post-container {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+</style>
